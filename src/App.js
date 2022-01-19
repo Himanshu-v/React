@@ -14,7 +14,7 @@ function App() {
     <>
       <Navbar />
       <div className="container my-3">
-        <TextForm />
+        <PaginationTable />
       </div>
     </>
   );
