@@ -13,7 +13,7 @@ import { useState, Fragment } from "react";
 import Alert from "./Components/Alert";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App() {
+function AppJSOrg() {
   const [mode, setMode] = useState("light");
   const [btnToggle, setBtnToggle] = useState("Enable Dark Mode");
   const [alert, setAlert] = useState(null);
@@ -60,7 +60,7 @@ function App() {
         <Alert alert={alert} />
         <div className="container my-3">
           <Routes>
-            <Route exact path="/about" element={<About mode={mode} />} />
+            <Route exact path="/about" element={<About />} />
 
             <Route
               exact

@@ -2,10 +2,20 @@ import React, { useState } from "react";
 
 export default function TextForm(props) {
   const handleUpClick = () => {
-    setText(text.toUpperCase());
+    if (text.length > 0) {
+      setText(text.toUpperCase());
+      props.showAlert("Converted to uppercase", "success");
+    } else {
+      props.showAlert("Input cannot be empty.", "warning");
+    }
   };
   const handleLoClick = () => {
-    setText(text.toLowerCase());
+    if (text.length > 0) {
+      setText(text.toLowerCase());
+      props.showAlert("Converted to lowerCase", "success");
+    } else {
+      props.showAlert("Input cannot be empty.", "warning");
+    }
   };
   const handleOnChange = (event) => {
     setText(event.target.value);
@@ -20,7 +30,12 @@ export default function TextForm(props) {
   return (
     <>
       <h1>{props.heading}</h1>
-      <div className=" container mb-3">
+      <div
+        className=" container mb-3"
+        style={{
+          color: props.mode === "dark" ? "white" : "black",
+        }}
+      >
         <label htmlFor="myBox" className="form-label"></label>
         <textarea
           className="form-control"
@@ -28,27 +43,31 @@ export default function TextForm(props) {
           onChange={handleOnChange}
           id="myBox"
           rows="8"
+          style={{
+            backgroundColor: props.mode === "dark" ? "grey" : "white",
+            color: props.mode === "dark" ? "white" : "black",
+          }}
         ></textarea>
       </div>
-      <button className="btn btn-primary mx-2" onClick={handleUpClick}>
+      <button className="btn btn-secondary mx-2" onClick={handleUpClick}>
         Convert to uppercase
       </button>
-      <button className="btn btn-primary mx-2" onClick={handleLoClick}>
+      <button className="btn btn-secondary mx-2" onClick={handleLoClick}>
         Convert to lowercase
       </button>
-      <button className="btn btn-primary mx-2" onClick={handleClearClick}>
+      <button className="btn btn-secondary mx-2" onClick={handleClearClick}>
         Clear Text
       </button>
-      <div className="container mb-3">
-        <h1>You text summary</h1>
-        <p>
-          The text has {text.split(" ").length} words and {text.length}{" "}
-          characters and it should take arount {0.008 * text.split(" ").length}
-          minutes to read
-        </p>
-        <h1>Preview</h1>
+      {/* <div
+        className="container mb-3"
+        style={{
+          color: props.mode === "dark" ? "white" : "black",
+        }}
+      >
+        
+        <h1>{text.length > 0 ? "Preview" : ""}</h1>
         <p>{text}</p>
-      </div>
+      </div> */}
     </>
   );
 }
